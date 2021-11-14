@@ -17,6 +17,7 @@ def api_search(request):
             'id': event.id,
             'title': event.title,
             'short_description': event.short_description,
+            'start_time': event.start_time,
             'url': '/events/%s/' % event.id
         }
         eventslist.append(obj)
