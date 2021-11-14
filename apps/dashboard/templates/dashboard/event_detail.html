@@ -1,0 +1,22 @@
+{% extends 'core/base.html' %} 
+
+{% block content %} 
+    <h1 class="title">{{ event.title }} ({{ event.get_status_display }})</h1>
+
+    <p class="is-size-4"> {{ event.short_description }}</p>
+
+    <p>Long Description   : {{ event.long_description }}</p>
+    <p>Start Time         : {{ event.start_time }}</p>
+    <p>End Time           : {{ event.end_time }}</p>
+    <p>Volunteer Area     : {{ event.volunteer_area }}</p>
+
+    <hr>
+
+
+    {% if event.status == 'active' %} 
+        <a href="{% url 'apply_for_event' event.id %}" class="button is-success">Apply for event</a>
+    {% else %}
+        <p> This event is not available anymore!!! </p>
+    {% endif %}
+
+{% endblock %} 

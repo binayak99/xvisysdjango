@@ -1,0 +1,14 @@
+{
+    "name": "abvis",
+    "version": "1.0.0",
+    "devDependencies": {
+        "grunt": "^1.4.1",
+        "grunt-contrib-saas": "^1.0.0",
+        "grunt-contrib-sass": "^2.0.0",
+        "grunt-contrib-uglify": "^5.0.1",
+        "grunt-contrib-watch": "^1.1.0"
+    },
+    "dependencies": {
+        "jest": "^27.2.1"
+    }
+}

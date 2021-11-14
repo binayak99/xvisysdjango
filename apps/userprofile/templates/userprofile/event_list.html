@@ -1,0 +1,51 @@
+{% extends "userprofile/base.html"%} {% block content %}
+
+<form method="get">
+  {{myFilter.form}}
+</form>
+<h5 class="text-center"><b>Volunteer Event Database</b></h5>
+<table class="table">
+  <thead class="border-buttom font-weight-bold">
+    <tr>
+      <td>Event ID</td>
+      <td>Event Name</td>
+      <td>Event Date</td>
+      <td>Event Start</td>
+      <td>Event End</td>
+      <td>Volunteers Required</td>
+      <td>Event Period</td>
+      <td>
+        <a href="{% url 'event_insert' %}" class="btn btn-outline-success">
+          <i class="fas fa-plus"></i> Add New
+        </a>
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    {% for event in event_list %}
+      <tr>
+        <td>{{event.id}}</td>
+        <td>{{event.eventdescription}}</td>
+        <td>{{event.eventdate}}</td>
+        <td>{{event.eventstart}}</td>
+        <td>{{event.eventend}}</td>
+        <td>{{event.volunteernumber}}</td>
+        <td>{{event.eventperiod}}</td>
+       
+        <td>
+          <a href="{% url 'event_update' event.id%}" class="btn text-secondary px-0">
+            <i class="far fa-edit fa-lg"></i>
+          </a>
+          <form action="{% url 'event_delete' event.id %}" method="post" class="d-inline">
+            {%csrf_token%}
+            <button type="submit" class="btn">
+              <i class="far fa-trash-alt fa-lg text-danger float-right"></i>
+            </button>
+          </form>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+
+</table>
+{% endblock content%}

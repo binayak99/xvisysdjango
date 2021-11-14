@@ -1,0 +1,94 @@
+{% extends 'core/base.html' %} 
+
+{% block content %} 
+    <div id="search-app">
+        <h1 class="title">Search</h1>
+
+        <form @submit.prevent="performSearch()">
+            <div class="columns">
+                <div class="column is-4">
+                    <div class="field">
+                        
+
+                        <div class="control">
+                            <input class="input is-info" type="text" placeholder="Search For Events">
+                           <!-- <input type="text" name="query" class="input" v-model="query"> -->
+                        </div>
+                    </div>
+                
+
+                    <div class="field">
+                       <div class="control">
+                            <button class="button is-success">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </form>
+
+        <div v-if="events.length">
+            <hr>
+
+            <div
+                v-for="event in events"
+                :key="event.id"
+                class="notification mt-2"
+            >
+                <h3 class="is-size-4">[[ event.title ]]</h3>
+                <p>[[ event.short_description ]]</p>
+
+                <a :href="event.url">View details</a>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .v-for{
+        background: linear-gradient(45deg,#bda5ff,#6ac1c5);
+        }
+    </style>
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+    const SearchApp = {
+        data() {
+            return {
+                query: '',
+                events: []
+            }
+        },
+        delimiters: ['[[', ']]'],
+        methods: {
+            performSearch() {
+                var data = {
+                    'query': this.query
+                }
+                
+                fetch('/events/api/search/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{ csrf_token }}'
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then((response) => {
+                    return response.json()
+                })
+                .then((result) => {
+                    console.log(result.events)
+                    this.events = result.events
+                })
+                .catch((error) => {
+                    console.log('Error', error)
+                })
+
+            }
+        }
+    }
+
+    Vue.createApp(SearchApp).mount('#search-app')
+</script>
+{% endblock %} 

@@ -1,0 +1,145 @@
+{% extends 'core/base.html' %} 
+
+{% block content %} 
+    <div id="add-event-app">
+    <h1 class="title"> Add Event</h1>
+
+    <form v-on:submit="validateForm()" method="post" action="." >
+
+        {% csrf_token %}
+
+        {% if form.errors %} 
+            {% for error in form.errors %} 
+                <div class="notification is-danger">
+                    {{ error }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <div class="notifiation is-danger" v-if="errors.length">
+            <p v-for="error in errors">
+                [[ error ]]
+            </p>
+
+        </div>
+
+        <div class="field">
+            <lable> Title </lable>
+            
+            <div class="control">
+                <input class="input" type="text" name="title" id="id_title" v-model="title">
+            </div>
+        </div>
+        
+        <div class="field">
+            <lable>Short description</lable>
+            
+            <div class="control">
+                <textarea class="textarea" name="short_description" id="id_short_description" v-model="short_description"></textarea>
+            </div>
+        </div>
+
+        <div class="field">
+            <lable>Long description</lable>
+            
+            <div class="control">
+                <textarea class="textarea" name="long_description" id="id_long_description" v-model="long_description"></textarea>
+            </div>
+        </div>
+
+        <div class="field">
+            <lable>Start Time</lable>
+            
+            <div class="control">
+                <input type="datetime" name="start_time" id="id_start_time" v-model="start_time">
+            </div>
+        </div>
+
+        <div class="field">
+            <lable>End Time</lable>
+            
+            <div class="control">
+                <input type="datetime" name="end_time" id="id_end_time" v-model="end_time">
+            </div>
+        </div>
+
+        <div class="field">
+            <lable> Volunteer Area </lable>
+            
+            <div class="control">
+                <input class="input" type="text" name="volunteer_area" id="id_volunteer_area" v-model="volunteer_area">
+            </div>
+        </div>
+
+        
+
+
+        <div class="field">
+            <div class="control">
+                <button class="button is-success">Submit</button>
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+ 
+
+{% endblock %} 
+
+{% block scripts %}
+<script>
+    const AddEventApp= {
+        data() {
+            return {
+                title: '',
+                short_description: '',
+                long_description: '',
+                start_time: '',
+                end_time: '',
+                errors: []
+            }
+        },
+        delimiters: ['[[', ']]'],
+        methods: {
+            validateForm(e) {
+                this.errors = [] 
+
+                if (this.title === '') {
+                    this.errors.push('The title field is missing!')
+                }
+
+                
+                if (this.short_description === '') {
+                    this.errors.push('The short description field is missing!')
+                }
+
+                
+                if (this.long_description === '') {
+                    this.errors.push('The long description field is missing!')
+                }
+
+                if (this.start_time === '') {
+                    this.errors.push('The start time field is missing!')
+                }
+
+                if (this.end_time === '') {
+                    this.errors.push('The end time field is missing!')
+                }
+
+
+                if(this.errors.length) {
+                    e.preventDefault()
+
+                    return false
+                } else {
+                    return true
+                }
+            }
+        }
+    }
+
+    Vue.createApp(AddEventApp).mount('#add-event-app');
+</script>
+{% endblock %}

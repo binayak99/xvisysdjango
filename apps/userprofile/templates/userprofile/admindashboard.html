@@ -1,0 +1,36 @@
+{% extends 'core/base.html' %} 
+
+{% block content %} 
+    <h1 class="title">Dashboard</h1>
+
+    {% if userprofile.is_admin %} 
+        <h2 class="subtitle">Events</h2>
+
+        <a href="{% url 'add_event' %}" class="button is-success">Add event</a>
+        <a href="{% url 'family_list' %}" class="button is-success">DATABASE</a>
+        <br></br>
+
+        {% for event in request.user.events.all %}
+            
+            <div class="event">
+              <a href="{% url 'view_dashboard_event' event.id %}">{{ event.title }} ({{ event.get_status_display }}) <br></br></a>  
+            </div>
+        {% empty %} 
+            <p> You don't have any events yet...</p>
+        {% endfor %} 
+    {% else %} 
+        <h2 class="subtitle">Applications</h2>
+
+        {% for application in  request.user.applications.all %} 
+            <div class= "application">
+                <a href="{% url 'view_application' application.id %}">{{ application.event.title }} <br></br></a>
+            </div>
+        {% empty %} 
+            <p> You haven't applied for any events yet...</p>
+        {% endfor %}
+    {% endif %} 
+
+{% endblock %} 
+
+
+    

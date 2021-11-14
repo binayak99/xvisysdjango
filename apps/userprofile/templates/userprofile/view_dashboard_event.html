@@ -1,0 +1,22 @@
+{% extends 'core/base.html' %} 
+
+{% block content %} 
+    <h1 class="title">View event - {{ event.title }}</h1>
+
+    <a href="{% url 'edit_event' event.id %}" class="button is-success mb-4">Edit</a>  
+
+    <p class="is-size-4"> {{ event.short_description }}</p>
+
+    <p>Long Description   : {{ event.long_description }}</p>
+    <p>Start Time         : {{ event.start_time }}</p>
+    <p>End Time           : {{ event.end_time }}</p>
+    <p>Volunteer Area     : {{ event.volunteer_area }}</p>
+
+    <br>
+    </br>
+    <h3 class="subtitle"> Applicants </h3>
+    {% for application in event.applications.all %} 
+        <a href="{% url 'view_application' application.id %}">{{ application.created_by.username }} <br></br></a>
+    {% endfor %}
+
+{% endblock %}

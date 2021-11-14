@@ -1,0 +1,22 @@
+{% extends 'core/basic.html' %}
+
+
+{% block title %}
+Calendar
+{% endblock %}
+
+{% block content %}
+<div class="clearfix">
+	<a class="btn btn-info left" href="{% url 'core:calendar' %}?{{ prev_month }}"> Previous Month </a>
+	<a class="btn btn-success left" href="{% url 'dashboard' %}?{{ next_month }}"> Back to Frontpage </a>
+	<a class="btn btn-info right" href="{% url 'core:calendar' %}?{{ next_month }}"> Next Month </a>
+	<a class="btn btn-info right" href="{% url 'core:event_new' %}"> Add Event </a>
+</div>
+ 
+
+{{ calendar }}
+
+
+{% endblock %}
+
+

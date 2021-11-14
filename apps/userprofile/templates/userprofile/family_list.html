@@ -1,0 +1,50 @@
+{% extends "userprofile/base.html"%} {% block content %}
+
+<form method="get">
+  {{myFilter.form}}
+</form>
+<h5 class="text-center"><b>Family Database</b></h5>
+<table class="table table-borderless">
+  <thead class="border-buttom font-weight-bold">
+    <tr>
+      <td>Family Id</td>
+      <td>Parent1 Name</td>
+      <td>Parent2 Name</td>
+      <td>Home Phone</td>
+      <td>Business Phone</td>
+      <td>Mailing Address</td>
+      <td>Email Address</td>
+      <td>
+        <a href="{% url 'family_insert' %}" class="btn btn-outline-success">
+          <i class="fas fa-plus"></i> Add New
+        </a>
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    {% for family in family_list %}
+      <tr>
+        <td>{{family.id}}</td>
+        <td>{{family.parent1name}}</td>
+        <td>{{family.parent2name}}</td>
+        <td>{{family.homephone}}</td>
+        <td>{{family.businessphone}}</td>
+        <td>{{family.mailingaddress}}</td>
+        <td>{{family.emailaddress}}</td>
+        <td>
+          <a href="{% url 'family_update' family.id%}" class="btn text-secondary px-0">
+            <i class="far fa-edit fa-lg"></i>
+          </a>
+          <form action="{% url 'family_delete' family.id %}" method="post" class="d-inline">
+            {%csrf_token%}
+            <button type="submit" class="btn">
+              <i class="far fa-trash-alt fa-lg text-danger float-right"></i>
+            </button>
+          </form>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+
+</table>
+{% endblock content%}

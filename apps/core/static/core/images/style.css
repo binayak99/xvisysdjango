@@ -1,0 +1,134 @@
+h1 {
+    color: rgb(7,12,17);
+    
+}
+
+#bg{
+   background-repeat: no-repeat;
+   background-size: 100%;
+   background-position: top;
+   background-attachment: fixed;
+}
+
+#box{
+  width:400px;
+  height:120px;
+  text-align: center;
+  background-size: 400px 120px;
+  background-repeat: no-repeat;
+}
+html {
+  height: 100%;
+}
+
+body {
+  background: linear-gradient(45deg,#6ac1c5, #bda5ff);
+  min-height: 100%;
+}
+
+
+.sticky-footer {
+  position: sticky;
+  
+}
+
+.affix {
+    top: 0;
+    width: 100%;
+    z-index: 9999 !important;
+  }
+
+  .affix + .container-fluid {
+    padding-top: 70px;
+  }
+
+  .twp-video-background {
+    background: #000;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+  .twp-video-foreground,
+  .twp-video-background #myvideo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    box-sizing: border-box;
+  }
+  .twp-video-foreground{
+    padding-bottom: 56.25%;
+    box-sizing: border-box;
+    
+  }
+  .twp-video-layer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0.6;
+    box-sizing: border-box;
+  }
+
+  @media(max-width: 1199px) {
+    .twp-video-background, .twp-video-layer { 
+      display: none; 
+    }
+  }
+
+
+  .calendar {
+    width: 98%;
+    margin: auto;
+    font-size: 13px;
+  }
+  
+  .calendar tr, .calendar td {
+    border: 1px solid black;
+  }
+  
+  .calendar th {
+    padding: 10px;
+    text-align: center;
+    font-size: 18px;
+  }
+  
+  .calendar td {
+    width: 200px;
+    height: 150px;
+    padding: 20px 0px 0px 5px;
+  }
+  
+  .month {
+    font-size: 25px;
+  }
+  
+  .date {
+    font-size: 16px;
+  }
+  
+  ul {
+    height: 100%;
+    padding: 0px 5px 0px 20px;
+  }
+  
+  a {
+    color: #17a2b8;
+  } 
+
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  .hero {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg,#6ac1c5, #bda5ff);
+  }
